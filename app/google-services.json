@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "379550772531",
+    "project_id": "openpaytest-1cb01",
+    "storage_bucket": "openpaytest-1cb01.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:379550772531:android:2bcba412bf013b55a76246",
+        "android_client_info": {
+          "package_name": "com.sngular.openpaytest"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC3uQIGt0UYiXmYrn5ynz3OedPnzlkasn4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
