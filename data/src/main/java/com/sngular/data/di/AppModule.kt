@@ -4,8 +4,16 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.sngular.data.BuildConfig
+import com.sngular.data.datasource.local.MoviesLocalDatasourceImpl
+import com.sngular.data.datasource.remote.MoviesRemoteDatasourceImpl
 import com.sngular.data.network.api.ApiAdapter
 import com.sngular.data.network.api.ApiService
+import com.sngular.data.network.mapper.MovieMapper
+import com.sngular.data.repository.MoviesRepositoryImpl
+import com.sngular.domain.datasource.local.MoviesLocalDatasource
+import com.sngular.domain.datasource.remote.MoviesRemoteDatasource
+import com.sngular.domain.repository.MoviesRepository
+import com.sngular.domain.usecase.GetMoviesUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -19,6 +27,9 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object AppModule {
 
+    /***************************************************************
+    *START PROVIDE API SERVICES
+    */
     @Provides
     @Singleton
     fun provideApiService(okHttpClient: OkHttpClient): ApiService {
@@ -40,29 +51,49 @@ object AppModule {
         return Firebase.firestore
     }
 
-    /*@Provides
+    /***************************************************************
+     *START PROVIDE DATASOURCES
+     */
+
+    @Provides
     @Singleton
-    fun provideRemindsDataSource(source: FirebaseFirestore, mapper: ReminderMapper): RemindersDataSource{
-        return RemindersDataSourceImpl(source, mapper)
+    fun provideMoviesRemoteDatasource(apiService: ApiService, mapper: MovieMapper): MoviesRemoteDatasource{
+        return MoviesRemoteDatasourceImpl(apiService, mapper)
     }
 
     @Provides
     @Singleton
-    fun provideMoviesRepository(remoteDatasource: MoviesRemoteDatasource, mapper: ReminderMapper): MoviesRepository{
-        return RemindersRepositoryImpl(dataSource)
+    fun provideMoviesLocalDatasource(apiService: ApiService, mapper: MovieMapper): MoviesLocalDatasource{
+        return MoviesLocalDatasourceImpl(apiService, mapper)
     }
 
+    /***************************************************************
+     *START PROVIDE REPOSITORIES
+     */
     @Provides
     @Singleton
-    fun provideReminderMapper(): ReminderMapper{
-        return ReminderMapper()
+    fun provideMoviesRepository(remoteDatasource: MoviesRemoteDatasource, localDatasource: MoviesLocalDatasource): MoviesRepository{
+        return MoviesRepositoryImpl(localDatasource, remoteDatasource)
     }
 
 
+    /***************************************************************
+     *START PROVIDE MAPPERS
+     */
     @Provides
     @Singleton
-    fun provideGetRemindersUseCase(repository: RemindersRepository): GetRemindersUseCase{
-        return GetRemindersUseCase(repository)
-    }*/
+    fun provideMovieMapper(): MovieMapper{
+        return MovieMapper()
+    }
+
+
+    /***************************************************************
+     *START PROVIDE USECASES
+     */
+    @Provides
+    @Singleton
+    fun provideGetMoviesUseCase(repository: MoviesRepository): GetMoviesUseCase{
+        return GetMoviesUseCase(repository)
+    }
 
 }

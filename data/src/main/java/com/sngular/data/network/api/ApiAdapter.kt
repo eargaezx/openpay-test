@@ -17,7 +17,7 @@ object ApiAdapter {
 
 
         // Create a trust manager that does not validate certificate chains
-        val trustAllCerts = arrayOf<TrustManager>(object : X509TrustManager {
+        /*val trustAllCerts = arrayOf<TrustManager>(object : X509TrustManager {
             @Throws(CertificateException::class)
             override fun checkClientTrusted(chain: Array<java.security.cert.X509Certificate>, authType: String) {
             }
@@ -38,7 +38,7 @@ object ApiAdapter {
         val sslSocketFactory = sslContext.socketFactory
 
         httpClient.sslSocketFactory(sslSocketFactory, trustAllCerts[0] as X509TrustManager)
-        httpClient.hostnameVerifier ( HostnameVerifier{ _, _ -> true })
+        httpClient.hostnameVerifier ( HostnameVerifier{ _, _ -> true })*/
 
         httpClient.connectTimeout(1, TimeUnit.MINUTES)
         httpClient.writeTimeout(1, TimeUnit.MINUTES)

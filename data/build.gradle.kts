@@ -26,6 +26,7 @@ android {
         debug {
             isMinifyEnabled = false
             buildConfigField("String", "URL_API", "\"https://api.themoviedb.org/3/\"")
+            buildConfigField("String", "AUTHORIZATION", "\"Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI5ZDg2ZDQ1OTUzMjVlMDc3NmM5ZmQ3MTc4ZTM1OWVmMSIsInN1YiI6IjY1NGRhMDA4MjkzODM1MDBlMTExYTRhZCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.Rn7SNgBWaNEbIXybor_VaL65p8LKgfVEaFptlxlxPwc\"")
         }
 
         release {
