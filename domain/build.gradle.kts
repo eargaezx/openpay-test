@@ -54,6 +54,7 @@ dependencies {
     implementation("com.google.firebase:firebase-firestore-ktx")
     implementation("com.google.firebase:firebase-firestore:24.9.0")
     implementation("androidx.room:room-runtime:2.4.0")
+    implementation("androidx.paging:paging-runtime-ktx:3.2.1")
 
 
     testImplementation("junit:junit:4.13.2")
