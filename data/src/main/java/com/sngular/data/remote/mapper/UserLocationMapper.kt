@@ -20,5 +20,6 @@ class UserLocationMapper {
                 createdAt = createdAt
             )
         }
+
     }
 }

@@ -16,3 +16,5 @@ fun RecyclerView.fetchMoviesAdapter(): MoviesAdapter {
     setHasFixedSize(true)
     return _adapter
 }
+
+

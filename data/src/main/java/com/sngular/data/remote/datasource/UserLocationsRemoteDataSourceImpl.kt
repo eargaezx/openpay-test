@@ -39,7 +39,21 @@ class UserLocationsRemoteDataSourceImpl @Inject constructor(
     }
 
 
-    override fun setLocation(userLocation: UserLocation): Flow<Result<Boolean>> {
-        TODO("Not yet implemented")
+    override fun setLocation(userLocation: UserLocation): Flow<Result<Boolean>> = callbackFlow{
+        trySend(Result.Loading())
+        // Register listener
+        try {
+            source.collection("locations")
+                .add(UserLocationMapper.modelToDto(userLocation))
+                .addOnSuccessListener { documentReference ->
+                   Result.Success(true)
+                }
+                .addOnFailureListener { e ->
+                    trySend(Result.Error(e.message ?: e.toString()))
+                }
+        } catch (e: Exception) {
+            trySend(Result.Error(e.message ?: e.toString()))
+        }
+        close()
     }
 }

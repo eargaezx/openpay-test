@@ -14,6 +14,8 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
+import com.sngular.domain.model.UserLocation
+import com.sngular.domain.state.Result
 import com.sngular.openpaytest.R
 import com.sngular.openpaytest.databinding.FragmentLocationsBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -44,10 +46,7 @@ class PeopleLocationFragment : Fragment(), OnMapReadyCallback {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setupObserver()
-
-
-
+        setupUI()
     }
 
     private fun setupUI(){
@@ -57,25 +56,40 @@ class PeopleLocationFragment : Fragment(), OnMapReadyCallback {
     }
 
     private fun setupObserver(){
-        viewLifecycleOwner.lifecycleScope.launch(Dispatchers.IO) {
-            launch {
-                viewModel?.locations?.collect { locations ->
-                    val list = locations.data
-                    Log.e("", "")
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewModel?.locations?.collect(::onCollected)
+        }
+    }
+
+    private fun onCollected(result: Result<List<UserLocation>>){
+        when(result){
+            is Result.Loading -> {
+
+            }
+            is Result.Success -> {
+                result.data?.map { location ->
+                    googleMap.addMarker(MarkerOptions()
+                        .position(LatLng(location.latitude, location.longitude))
+                        .title(location.createdAt.toDate().toString()))
+
                 }
+                result.data?.last {
+                    return googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(
+                        LatLng(it.latitude, it.longitude), 13F
+                    ))
+                }
+            }
+            is Result.Error -> {
+
             }
         }
     }
 
-    override fun onMapReady(p0: GoogleMap) {
-        googleMap = googleMap
+    override fun onMapReady(map: GoogleMap) {
+        googleMap = map
 
-        // Add a marker in Sydney and move the camera
-        val sydney = LatLng(-34.0, 151.0)
-        googleMap.addMarker(MarkerOptions()
-            .position(sydney)
-            .title("Marker in Sydney"))
-        googleMap.moveCamera(CameraUpdateFactory.newLatLng(sydney))
+
+        setupObserver()
     }
 
 
