@@ -10,8 +10,8 @@ import com.sngular.domain.model.Movie
 import com.sngular.domain.model.MovieCategory
 import com.sngular.openpaytest.R
 import com.sngular.openpaytest.databinding.FragmentHomeBinding
-import kotlinx.coroutines.launch
 import com.sngular.openpaytest.ui.movies.adapter.MoviesAdapter
+import kotlinx.coroutines.launch
 import com.sngular.openpaytest.ui.utils.fetchMoviesAdapter
 import com.sngular.openpaytest.ui.utils.viewBinding
 import dagger.hilt.android.AndroidEntryPoint

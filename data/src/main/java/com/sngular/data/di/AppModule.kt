@@ -16,17 +16,22 @@ import com.sngular.data.remote.datasource.MoviesRemoteDatasourceImpl
 import com.sngular.data.remote.api.ApiAdapter
 import com.sngular.data.remote.api.ApiService
 import com.sngular.data.remote.datasource.PeopleRemoteDatasourceImpl
+import com.sngular.data.remote.datasource.UserLocationsRemoteDataSourceImpl
 import com.sngular.data.remote.mapper.MovieMapper
 import com.sngular.data.repository.MoviesRepositoryImpl
 import com.sngular.data.repository.PeopleRepositoryImpl
+import com.sngular.data.repository.UserLocationsRepositoryImpl
 import com.sngular.domain.datasource.local.MoviesLocalDatasource
 import com.sngular.domain.datasource.local.PeopleLocalDatasource
 import com.sngular.domain.datasource.remote.MoviesRemoteDatasource
 import com.sngular.domain.datasource.remote.PeopleRemoteDatasource
+import com.sngular.domain.datasource.remote.UserLocationsRemoteDatasource
 import com.sngular.domain.repository.MoviesRepository
 import com.sngular.domain.repository.PeopleRepository
+import com.sngular.domain.repository.UserLocationsRespository
 import com.sngular.domain.usecase.GetMoviesUseCase
 import com.sngular.domain.usecase.GetPeopleUseCase
+import com.sngular.domain.usecase.GetUserLocationUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -97,6 +102,11 @@ object AppModule {
         return PeopleRepositoryImpl(peopleRemoteDatasource, peopleLocalDatasource)
     }
 
+    @Provides
+    @Singleton
+    fun provideUserLocationsRepository(remoteDatasource: UserLocationsRemoteDatasource): UserLocationsRespository{
+        return UserLocationsRepositoryImpl(remoteDatasource)
+    }
 
     /***************************************************************
      *START PROVIDE MAPPERS
@@ -121,6 +131,12 @@ object AppModule {
     @Singleton
     fun provideGetPeopleUseCase(repository: PeopleRepository): GetPeopleUseCase{
         return GetPeopleUseCase(repository)
+    }
+
+    @Provides
+    @Singleton
+    fun provideGetUserlocationUseCase(repository: UserLocationsRespository): GetUserLocationUseCase{
+        return GetUserLocationUseCase(repository)
     }
 
     /***************************************************************
@@ -150,6 +166,13 @@ object AppModule {
     @Singleton
     fun providePeopleLocalDatasource(peopleDao: PeopleDao, peopleImageDao: PeopleImageDao): PeopleLocalDatasource{
         return PeopleLocalDatasourceImpl(peopleDao, peopleImageDao)
+    }
+
+
+    @Provides
+    @Singleton
+    fun provideUserLocationsDatasource(firestore: FirebaseFirestore): UserLocationsRemoteDatasource{
+        return UserLocationsRemoteDataSourceImpl(firestore)
     }
 
 

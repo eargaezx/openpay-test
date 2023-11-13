@@ -19,9 +19,9 @@
 
     <fragment
         android:id="@+id/navigation_locations"
-        android:name="com.sngular.openpaytest.ui.locations.DashboardFragment"
+        android:name="com.sngular.openpaytest.ui.locations.PeopleLocationFragment"
         android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
+        tools:layout="@layout/fragment_locations" />
 
     <fragment
         android:id="@+id/navigation_gallery"

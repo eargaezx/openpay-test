@@ -8,7 +8,7 @@ import com.sngular.openpaytest.ui.movies.adapter.MoviesAdapter
 fun String.urlPost() = BuildConfig.URL_IMAGE.plus(this)
 
 
-fun RecyclerView.fetchMoviesAdapter(): MoviesAdapter{
+fun RecyclerView.fetchMoviesAdapter(): MoviesAdapter {
     val _adapter  = MoviesAdapter()
     layoutManager = GridLayoutManager(context, 1,  GridLayoutManager.HORIZONTAL, false)
     //adapter setup
