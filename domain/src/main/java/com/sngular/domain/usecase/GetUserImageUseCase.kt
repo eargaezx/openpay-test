@@ -14,6 +14,6 @@ class GetUserImageUseCase @Inject constructor(
     private val dispatcher: CoroutineDispatcher = Dispatchers.IO
 ){
      operator fun invoke(): Flow<Result<List<UserImage>>> {
-        return repository.images.flowOn(dispatcher)
+        return repository.getAll().flowOn(dispatcher)
     }
 }

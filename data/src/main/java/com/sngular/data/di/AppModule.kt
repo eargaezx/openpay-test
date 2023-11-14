@@ -18,6 +18,7 @@ import com.sngular.data.remote.datasource.MoviesRemoteDatasourceImpl
 import com.sngular.data.remote.api.ApiAdapter
 import com.sngular.data.remote.api.ApiService
 import com.sngular.data.remote.datasource.PeopleRemoteDatasourceImpl
+import com.sngular.data.remote.datasource.UserImagesRemoteDatasourceImpl
 import com.sngular.data.remote.datasource.UserLocationsRemoteDataSourceImpl
 import com.sngular.data.remote.mapper.MovieMapper
 import com.sngular.data.repository.MoviesRepositoryImpl
@@ -28,6 +29,7 @@ import com.sngular.domain.datasource.local.MoviesLocalDatasource
 import com.sngular.domain.datasource.local.PeopleLocalDatasource
 import com.sngular.domain.datasource.remote.MoviesRemoteDatasource
 import com.sngular.domain.datasource.remote.PeopleRemoteDatasource
+import com.sngular.domain.datasource.remote.UserImagesRemoteDatasource
 import com.sngular.domain.datasource.remote.UserLocationsRemoteDatasource
 import com.sngular.domain.repository.MoviesRepository
 import com.sngular.domain.repository.PeopleRepository
@@ -123,8 +125,8 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideUserImagesRepository(firestore: FirebaseFirestore, storageReference: StorageReference): UserImagesRespository{
-        return UserImagesRepositoryImpl(firestore, storageReference)
+    fun provideUserImagesRepository(remoteDatasource: UserImagesRemoteDatasource): UserImagesRespository{
+        return UserImagesRepositoryImpl(remoteDatasource)
     }
 
 
@@ -203,8 +205,14 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideUserLocationsDatasource(firestore: FirebaseFirestore): UserLocationsRemoteDatasource{
+    fun provideUserLocationsRemoteDatasource(firestore: FirebaseFirestore): UserLocationsRemoteDatasource{
         return UserLocationsRemoteDataSourceImpl(firestore)
+    }
+
+    @Provides
+    @Singleton
+    fun provideUserImagesRemoteDatasource(firestore: FirebaseFirestore, firebaseStorage: StorageReference): UserImagesRemoteDatasource{
+        return UserImagesRemoteDatasourceImpl(firestore, firebaseStorage)
     }
 
 
