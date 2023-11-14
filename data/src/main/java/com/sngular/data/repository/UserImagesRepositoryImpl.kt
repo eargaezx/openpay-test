@@ -17,10 +17,9 @@ class UserImagesRepositoryImpl @Inject constructor(
     }
 
     override suspend fun uploadFiles(
-        fileUri: List<Uri>,
-        onResult: (Result<List<Uri>>) -> Unit
+        fileUri: List<Uri>
     ) {
-        remoteDatasource.uploadFiles(fileUri, onResult)
+        remoteDatasource.uploadFiles(fileUri)
     }
 
 }
