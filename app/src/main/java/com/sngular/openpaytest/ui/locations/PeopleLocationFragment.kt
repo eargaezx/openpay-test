@@ -1,12 +1,9 @@
 package com.sngular.openpaytest.ui.locations
 
 import android.os.Bundle
-import android.util.Log
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -18,30 +15,17 @@ import com.sngular.domain.model.UserLocation
 import com.sngular.domain.state.Result
 import com.sngular.openpaytest.R
 import com.sngular.openpaytest.databinding.FragmentLocationsBinding
+import com.sngular.openpaytest.ui.utils.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class PeopleLocationFragment : Fragment(), OnMapReadyCallback {
+class PeopleLocationFragment : Fragment(R.layout.fragment_locations), OnMapReadyCallback {
 
-    private var _binding: FragmentLocationsBinding? = null
-    private val binding get() = _binding!!
-    private var viewModel: PeopleLocationsViewModel? = null
-
+    private val binding by viewBinding(FragmentLocationsBinding::bind)
+    private val viewModel by viewModels<PeopleLocationsViewModel>()
 
     private lateinit var googleMap: GoogleMap
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        viewModel =  ViewModelProvider(this).get(PeopleLocationsViewModel::class.java)
-        _binding = FragmentLocationsBinding.inflate(inflater, container, false)
-        val root: View = binding.root
-
-        return root
-    }
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -57,7 +41,7 @@ class PeopleLocationFragment : Fragment(), OnMapReadyCallback {
 
     private fun setupObserver(){
         viewLifecycleOwner.lifecycleScope.launch {
-            viewModel?.locations?.collect(::onCollected)
+            viewModel.locations.collect(::onCollected)
         }
     }
 
@@ -87,16 +71,6 @@ class PeopleLocationFragment : Fragment(), OnMapReadyCallback {
 
     override fun onMapReady(map: GoogleMap) {
         googleMap = map
-
-
         setupObserver()
     }
-
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
-
-
 }

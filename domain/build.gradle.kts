@@ -50,9 +50,14 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.0")
     implementation("com.google.firebase:firebase-analytics-ktx")
     implementation("com.google.code.gson:gson:2.10.1")
+
+
     implementation(platform("com.google.firebase:firebase-bom:32.4.0"))
     implementation("com.google.firebase:firebase-firestore-ktx")
     implementation("com.google.firebase:firebase-firestore:24.9.0")
+    implementation("com.google.firebase:firebase-storage-ktx:20.0.1")
+
+
     implementation("androidx.room:room-runtime:2.4.0")
     implementation("androidx.paging:paging-runtime-ktx:3.2.1")
 

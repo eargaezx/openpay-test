@@ -29,9 +29,6 @@ class UserLocationsRemoteDataSourceImpl @Inject constructor(
                     }
 
                 }
-
-
-
         } catch (e: Exception) {
             trySend(Result.Error(e.message ?: e.toString()))
         }

@@ -4,7 +4,8 @@ import com.google.gson.annotations.SerializedName
 
 class PeopleImage(
 
-    @SerializedName("file_path")
+    @SerializedName("uri")
     val filePath: String?,
+
 )
 

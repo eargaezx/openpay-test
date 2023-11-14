@@ -5,6 +5,8 @@ import androidx.room.Room
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.StorageReference
 import com.sngular.data.BuildConfig
 import com.sngular.data.local.AppDatabase
 import com.sngular.data.local.dao.MovieDao
@@ -20,6 +22,7 @@ import com.sngular.data.remote.datasource.UserLocationsRemoteDataSourceImpl
 import com.sngular.data.remote.mapper.MovieMapper
 import com.sngular.data.repository.MoviesRepositoryImpl
 import com.sngular.data.repository.PeopleRepositoryImpl
+import com.sngular.data.repository.UserImagesRepositoryImpl
 import com.sngular.data.repository.UserLocationsRepositoryImpl
 import com.sngular.domain.datasource.local.MoviesLocalDatasource
 import com.sngular.domain.datasource.local.PeopleLocalDatasource
@@ -28,10 +31,13 @@ import com.sngular.domain.datasource.remote.PeopleRemoteDatasource
 import com.sngular.domain.datasource.remote.UserLocationsRemoteDatasource
 import com.sngular.domain.repository.MoviesRepository
 import com.sngular.domain.repository.PeopleRepository
+import com.sngular.domain.repository.UserImagesRespository
 import com.sngular.domain.repository.UserLocationsRespository
 import com.sngular.domain.usecase.GetMoviesUseCase
 import com.sngular.domain.usecase.GetPeopleUseCase
+import com.sngular.domain.usecase.GetUserImageUseCase
 import com.sngular.domain.usecase.GetUserLocationUseCase
+import com.sngular.domain.usecase.UploadImagesUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -55,6 +61,7 @@ object AppModule {
     ) = Room.databaseBuilder(context, AppDatabase::class.java, "database")
         .fallbackToDestructiveMigration()
         .build()
+
 
     /***************************************************************
     *START PROVIDE API SERVICES
@@ -80,6 +87,12 @@ object AppModule {
         return Firebase.firestore
     }
 
+
+    @Singleton
+    @Provides
+    fun provideFirebaseStroageInstance(): StorageReference {
+        return FirebaseStorage.getInstance().getReference("user")
+    }
 
 
     /***************************************************************
@@ -107,6 +120,13 @@ object AppModule {
     fun provideUserLocationsRepository(remoteDatasource: UserLocationsRemoteDatasource): UserLocationsRespository{
         return UserLocationsRepositoryImpl(remoteDatasource)
     }
+
+    @Provides
+    @Singleton
+    fun provideUserImagesRepository(firestore: FirebaseFirestore, storageReference: StorageReference): UserImagesRespository{
+        return UserImagesRepositoryImpl(firestore, storageReference)
+    }
+
 
     /***************************************************************
      *START PROVIDE MAPPERS
@@ -137,6 +157,18 @@ object AppModule {
     @Singleton
     fun provideGetUserlocationUseCase(repository: UserLocationsRespository): GetUserLocationUseCase{
         return GetUserLocationUseCase(repository)
+    }
+
+    @Provides
+    @Singleton
+    fun provideUploadImagesUseCase(repository: UserImagesRespository): UploadImagesUseCase{
+        return UploadImagesUseCase(repository)
+    }
+
+    @Provides
+    @Singleton
+    fun provideGetUserImageUseCase(repository: UserImagesRespository): GetUserImageUseCase{
+        return GetUserImageUseCase(repository)
     }
 
     /***************************************************************

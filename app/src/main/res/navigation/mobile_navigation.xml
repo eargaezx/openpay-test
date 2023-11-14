@@ -25,9 +25,9 @@
 
     <fragment
         android:id="@+id/navigation_gallery"
-        android:name="com.sngular.openpaytest.ui.gallery.NotificationsFragment"
+        android:name="com.sngular.openpaytest.ui.gallery.GalleryFragment"
         android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_notifications" />
+        tools:layout="@layout/fragment_gallery" />
 
 
 </navigation>
