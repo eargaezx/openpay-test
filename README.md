@@ -11,31 +11,34 @@
 
 
 ### Screen 2. Most popular user on themoviedb, with general information, own images, reviews:
-![Screenshot_20231114_134518_OpenpayTest](https://github.com/eargaezx/openpay-test/assets/143432782/6e1d81ba-075a-46dc-bfca-879e5dc36068)
+![Screenshot_20231114_134518_OpenpayTest](https://github.com/eargaezx/openpay-test/assets/143432782/bcad5258-55ec-4548-b401-fac38a84ac36)
+
 
 
 
 ### Screen 3. Paginated movies sparated by popular, top rated, most rated:
-![Screenshot_20231114_134531_OpenpayTest](https://github.com/eargaezx/openpay-test/assets/143432782/90061d39-8d3c-4297-9ed8-36ae94fafb3f)
+![Screenshot_20231114_134531_OpenpayTest](https://github.com/eargaezx/openpay-test/assets/143432782/ab3895a7-ff2d-46ea-94ef-6aed563a826e)
+
 
 
 
 ### Screen 4. Location map on realtime database, service runing on foregroun that capture de user location every lapsed time 
-![Screenshot_20231114_134546_OpenpayTest](https://github.com/eargaezx/openpay-test/assets/143432782/3e5c1f50-087e-4e57-a14c-e9a15a468376)
+![Screenshot_20231114_134546_OpenpayTest](https://github.com/eargaezx/openpay-test/assets/143432782/7593e357-e3ed-4481-979d-a63459250f1c)
+
 
 
 
 ### Screen 5. Realtime load images storaged firebase picked from gallery or camera
-![Screenshot_20231114_134552_OpenpayTest](https://github.com/eargaezx/openpay-test/assets/143432782/374beaab-2708-44e4-be7e-b92755d89e50)
+![Screenshot_20231114_134552_OpenpayTest](https://github.com/eargaezx/openpay-test/assets/143432782/e9106df5-dd36-4a03-88c4-77858f2a257b)
+
 
 
 
 ### Screen 6. Firebase storage and firebase database of user locations, user images
-<img width="1277" alt="Captura de pantalla 2023-11-14 a la(s) 1 46 52 p m" src="https://github.com/eargaezx/openpay-test/assets/143432782/ccd9c070-90a3-4ac2-9f47-ba63d7908320">
+<img width="1277" alt="Captura de pantalla 2023-11-14 a la(s) 1 46 52 p m" src="https://github.com/eargaezx/openpay-test/assets/143432782/03cf3ae0-d803-461e-834c-b735f9fd99cb">
+<img width="1280" alt="Captura de pantalla 2023-11-14 a la(s) 1 46 19 p m" src="https://github.com/eargaezx/openpay-test/assets/143432782/14a130af-7f2c-45da-b9d0-062bbdc6ec38">
+<img width="1279" alt="Captura de pantalla 2023-11-14 a la(s) 1 47 23 p m" src="https://github.com/eargaezx/openpay-test/assets/143432782/e9359041-bc03-4bc5-abd4-2aebfe138cfd">
 
-<img width="1280" alt="Captura de pantalla 2023-11-14 a la(s) 1 46 19 p m" src="https://github.com/eargaezx/openpay-test/assets/143432782/14c0b266-600c-4143-b90f-e6074ad54f8c">
-
-<img width="1279" alt="Captura de pantalla 2023-11-14 a la(s) 1 47 23 p m" src="https://github.com/eargaezx/openpay-test/assets/143432782/90cec48e-542e-4137-af4e-f78e8209a5fe">
 
 
 ### Project documentation
