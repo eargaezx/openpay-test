@@ -65,3 +65,11 @@
 - [Glide](https://bumptech.github.io/glide/) - Glide is a fast and efficient image loading library for Android 
 
 
+## What could be better:
+- Handle empety states
+- Add unit tests
+- Mappers
+- UI
+  - Login user
+  - Back button
+- Coding comments standard for continuous inspection of code quality tools as sonarqube, codacy etc...
