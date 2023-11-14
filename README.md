@@ -76,3 +76,5 @@
   - Login user
   - Back button
 - Coding comments standard for continuous inspection of code quality tools as sonarqube, codacy etc...
+
+## Sngular - It can be done:
