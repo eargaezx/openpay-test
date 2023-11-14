@@ -1,4 +1,4 @@
-# SNGULAR Openpay-test
+# SNGULAR Openpay-Test
 ## Version 1.0.0
 ### Developer: [Eduardo Argaez](https://eargaez-de230.web.app/)
 ⋅⋅⋅
