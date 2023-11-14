@@ -1,11 +1,11 @@
 package com.sngular.domain.datasource.local
 
-import com.sngular.domain.model.Location
+import com.sngular.domain.model.UserLocation
 import kotlinx.coroutines.flow.Flow
 
 interface LocationsLocalDatasource {
-    fun getAll(): Flow<Result<List<Location>>>
+    fun getAll(): Flow<Result<List<UserLocation>>>
 
-    fun setLocation(location: Location): Flow<Result<Boolean>>
+    fun setLocation(userLocation: UserLocation): Flow<Result<Boolean>>
 
 }
