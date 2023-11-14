@@ -5,9 +5,9 @@
 
 
 ### Screeen 1. Access permisions control:
-![Screenshot_20231114_135309_Permission controller](https://github.com/eargaezx/openpay-test/assets/143432782/d4b1e39b-c6f7-45b5-9f7c-59d987ac0941)
+![Screenshot_20231114_135309_Permission controller](https://github.com/eargaezx/openpay-test/assets/143432782/9ab9183a-178d-4cf0-ba10-d5f823ceee54)
+![Screenshot_20231114_135317_Permission controller](https://github.com/eargaezx/openpay-test/assets/143432782/76a45a17-5914-4e70-8e24-e7725895a400)
 
-![Screenshot_20231114_135317_Permission controller](https://github.com/eargaezx/openpay-test/assets/143432782/4610fe8a-bc70-48fe-9e2f-fea4f8600561)
 
 
 ### Screen 2. Most popular user on themoviedb, with general information, own images, reviews:
