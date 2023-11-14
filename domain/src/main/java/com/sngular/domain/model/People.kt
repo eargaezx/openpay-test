@@ -24,5 +24,8 @@ class People(
 
     @Ignore
     var peopleImages: List<PeopleImage> = listOf(),
+
+    @Ignore
+    var reviews: List<Review> = listOf(),
 )
 

@@ -4,6 +4,7 @@ import com.sngular.data.remote.api.StatusCode
 import com.sngular.data.remote.api.ApiService
 import com.sngular.data.remote.mapper.PeopleImageMapper
 import com.sngular.data.remote.mapper.PeopleMapper
+import com.sngular.data.remote.mapper.ReviewMapper
 import com.sngular.domain.datasource.remote.PeopleRemoteDatasource
 import javax.inject.Inject
 import com.sngular.domain.state.Result
@@ -22,11 +23,19 @@ class PeopleRemoteDatasourceImpl @Inject constructor(
                     val people = PeopleMapper.dtoToModel(
                         responsePeople.body()!!.results!!.first()
                     )
+
                     val responseImages = apiService.getPeopleImages(people.id)
                     if(responseImages.code() == StatusCode.SUCCESS.code){
                         people.peopleImages =
                             responseImages.body()!!.profiles!!.map { PeopleImageMapper.dtoToModel(it) }
                     }
+
+                    val responseReviews = apiService.getReviews(1)
+                    if(responseImages.code() == StatusCode.SUCCESS.code){
+                        people.reviews =
+                            responseReviews.body()!!.results!!.map { ReviewMapper.dtoToModel(it) }
+                    }
+
                     Result.Success(people)
                 }
 

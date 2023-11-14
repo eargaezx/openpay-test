@@ -3,6 +3,7 @@ package com.sngular.data.remote.api
 import com.sngular.data.remote.response.MoviesResponse
 import com.sngular.data.remote.response.PeopleImageResponse
 import com.sngular.data.remote.response.PeopleResponse
+import com.sngular.data.remote.response.ReviewResponse
 import retrofit2.Response
 import retrofit2.http.*
 
@@ -41,4 +42,10 @@ interface ApiService {
         @Query("page") page: Int,
         @Query("language") region: String? = "en-US",
     ): Response<MoviesResponse>
+
+    @GET("movie/575264/reviews")
+    suspend fun getReviews(
+        @Query("page") page: Int,
+        @Query("language") region: String? = "en-US",
+    ): Response<ReviewResponse>
 }
