@@ -12,6 +12,7 @@ class PeopleImageViewHolder(private val binding: ItemMovieLayoutBinding) : ViewH
     public fun bind( peopleImage: PeopleImage){
         peopleImage.filePath?.let {
             GlideHelper.invoke(it.urlPost(), binding.imageView)
+            binding.textView.text = it
         }
     }
 }

@@ -9,7 +9,6 @@ import com.sngular.openpaytest.ui.utils.urlPost
 class MovieViewHolder(private val binding: ItemMovieLayoutBinding) : ViewHolder(binding.root) {
 
     public fun bind( movie: Movie){
-        binding.textView.text = movie.title
         movie.posterPath?.let {
             GlideHelper.invoke(it.urlPost(), binding.imageView)
         }

@@ -17,10 +17,9 @@ class GalleryViewModel @Inject constructor(
 ) : ViewModel() {
     val uploadedImages = getUserImageUseCase.invoke()
 
-    fun uploadMultipleFile(fileUris: List<Uri>, onResult: (Result<List<Uri>>) -> Unit){
-        onResult.invoke(Result.Loading())
+    fun uploadMultipleFile(fileUris: List<Uri>){
         viewModelScope.launch {
-            uploadImageUseCase.invoke(fileUris,onResult)
+            uploadImageUseCase.invoke(fileUris)
         }
     }
 

@@ -11,6 +11,10 @@
     <string name="label_images">Images</string>
     <string name="label_upload_image">Upload</string>
     <string name="label_reviews">Reviews</string>
+    <string name="label_error">Error</string>
+    <string name="label_exception">Exception</string>
+
+    <string name="label_done">Done</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

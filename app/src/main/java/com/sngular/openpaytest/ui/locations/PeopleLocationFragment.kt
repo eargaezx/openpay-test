@@ -15,12 +15,14 @@ import com.sngular.domain.model.UserLocation
 import com.sngular.domain.state.Result
 import com.sngular.openpaytest.R
 import com.sngular.openpaytest.databinding.FragmentLocationsBinding
+import com.sngular.openpaytest.ui.dialogs.DialogNavigator
 import com.sngular.openpaytest.ui.utils.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class PeopleLocationFragment : Fragment(R.layout.fragment_locations), OnMapReadyCallback {
+    private val dialogNavigator: DialogNavigator by lazy { DialogNavigator(childFragmentManager) }
 
     private val binding by viewBinding(FragmentLocationsBinding::bind)
     private val viewModel by viewModels<PeopleLocationsViewModel>()
@@ -48,7 +50,7 @@ class PeopleLocationFragment : Fragment(R.layout.fragment_locations), OnMapReady
     private fun onCollected(result: Result<List<UserLocation>>){
         when(result){
             is Result.Loading -> {
-
+                //empty loading
             }
             is Result.Success -> {
                 result.data?.map { location ->
@@ -57,14 +59,15 @@ class PeopleLocationFragment : Fragment(R.layout.fragment_locations), OnMapReady
                         .title(location.createdAt.toDate().toString()))
 
                 }
-                result.data?.last {
-                    return googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(
+                result.data?.last()?.let {
+                    googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(
                         LatLng(it.latitude, it.longitude), 13F
                     ))
                 }
             }
             is Result.Error -> {
-
+                dialogNavigator.hideLoading(tag!!)
+                dialogNavigator.showException(result.message!!)
             }
         }
     }

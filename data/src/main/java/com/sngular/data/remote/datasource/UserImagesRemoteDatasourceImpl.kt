@@ -48,8 +48,7 @@ class UserImagesRemoteDatasourceImpl @Inject constructor(
     }
 
     override suspend fun uploadFiles(
-        fileUri: List<Uri>,
-        onResult: (Result<List<Uri>>) -> Unit
+        fileUri: List<Uri>
     ) {
         try {
             val uri: List<Uri> = withContext(Dispatchers.IO) {
@@ -67,11 +66,11 @@ class UserImagesRemoteDatasourceImpl @Inject constructor(
                     }
                 }.awaitAll()
             }
-            onResult.invoke(Result.Success(uri))
+           // onResult.invoke(Result.Success(uri))
         } catch (e: FirebaseException){
-            onResult.invoke(Result.Error(e.toString()))
+            //onResult.invoke(Result.Error(e.toString()))
         }catch (e: Exception){
-            onResult.invoke(Result.Error(e.toString()))
+            //onResult.invoke(Result.Error(e.toString()))
         }
     }
 

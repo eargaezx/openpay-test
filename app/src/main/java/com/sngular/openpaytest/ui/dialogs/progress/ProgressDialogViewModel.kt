@@ -1,7 +1,6 @@
-package com.sngular.openpaytest.ui.progress
+package com.sngular.openpaytest.ui.dialogs.progress
 
 import androidx.lifecycle.ViewModel
-import com.sngular.domain.usecase.GetPeopleUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 

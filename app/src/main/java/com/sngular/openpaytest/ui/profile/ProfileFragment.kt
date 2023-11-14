@@ -1,7 +1,6 @@
 package com.sngular.openpaytest.ui.profile
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -12,16 +11,13 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.sngular.domain.state.Result
 import com.sngular.openpaytest.R
 import com.sngular.openpaytest.databinding.FragmentProfileBinding
-import com.sngular.openpaytest.ui.movies.adapter.MoviesAdapter
 import com.sngular.openpaytest.ui.profile.adapter.PeopleImageAdapter
 import com.sngular.openpaytest.ui.profile.adapter.PeopleReviewAdapter
-import com.sngular.openpaytest.ui.progress.DialogNavigator
-import com.sngular.openpaytest.ui.progress.ProgressDialogFragment
+import com.sngular.openpaytest.ui.dialogs.DialogNavigator
 import com.sngular.openpaytest.ui.utils.GlideHelper
 import com.sngular.openpaytest.ui.utils.urlPost
 import com.sngular.openpaytest.ui.utils.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
-import dagger.hilt.android.migration.CustomInjection.inject
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
@@ -54,7 +50,7 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
             viewModel.uiState.collect{  result ->
                 when(result){
                     is Result.Loading -> {
-                        dialogNavigator.showDialog(tag!!)
+                        dialogNavigator.showLoading(tag!!)
                     }
                     is Result.Success -> {
                         binding.model = result.data
@@ -70,10 +66,11 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
                             adapterReviews.submitData(PagingData.from(it))
                         }
 
-                        dialogNavigator.hideDialog(tag!!)
+                        dialogNavigator.hideLoading(tag!!)
                     }
                     is Result.Error -> {
-                        dialogNavigator.hideDialog(tag!!)
+                        dialogNavigator.hideLoading(tag!!)
+                        dialogNavigator.showException(result.message!!)
                     }
                 }
             }
