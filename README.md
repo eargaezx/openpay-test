@@ -1,7 +1,8 @@
 # openpay-test
 ## Version 1.0.0
+### Developer: [Eduardo Argaez](https://eargaez-de230.web.app/)
 ⋅⋅⋅
-## Developer: [Eduardo Argaez](https://eargaez-de230.web.app/)
+
 
 ### Screeen 1. Access permisions control:
 ![Screenshot_20231114_135309_Permission controller](https://github.com/eargaezx/openpay-test/assets/143432782/d4b1e39b-c6f7-45b5-9f7c-59d987ac0941)
