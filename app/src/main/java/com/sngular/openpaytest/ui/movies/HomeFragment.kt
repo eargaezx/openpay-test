@@ -41,17 +41,17 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
 
     private fun setupObserver() {
-        viewLifecycleOwner.lifecycleScope.launch {
+        viewLifecycleOwner.lifecycleScope.launch (Dispatchers.IO){
             viewModel.popularMovies.collect { pagingData ->
                 loadRecyclerViewData(MovieCategory.Popular, pagingData)
             }
         }
-        viewLifecycleOwner.lifecycleScope.launch {
+        viewLifecycleOwner.lifecycleScope.launch  (Dispatchers.IO){
             viewModel.topRatedMovies.collect { pagingData ->
                 loadRecyclerViewData(MovieCategory.TopRated, pagingData)
             }
         }
-        viewLifecycleOwner.lifecycleScope.launch {
+        viewLifecycleOwner.lifecycleScope.launch  (Dispatchers.IO){
             viewModel.suggestedMovies.collect { pagingData ->
                 loadRecyclerViewData(MovieCategory.Suggested, pagingData)
             }
