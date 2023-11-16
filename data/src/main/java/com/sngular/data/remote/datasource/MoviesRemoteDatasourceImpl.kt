@@ -1,12 +1,9 @@
 package com.sngular.data.remote.datasource
 
-import com.sngular.data.BuildConfig
 import com.sngular.data.remote.api.StatusCode
 import com.sngular.data.remote.api.ApiService
 import com.sngular.data.remote.mapper.MovieMapper
 import com.sngular.domain.datasource.remote.MoviesRemoteDatasource
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 import com.sngular.domain.state.Result
 import com.sngular.domain.model.Movie
@@ -24,7 +21,7 @@ class MoviesRemoteDatasourceImpl @Inject constructor(
                 StatusCode.SUCCESS.code -> {
                     Result.Success(
                         response.body()!!.results!!.map {
-                            mapper.toModel(it)
+                            mapper.dtoToModel(it)
                         }
                     )
                 }
@@ -43,7 +40,7 @@ class MoviesRemoteDatasourceImpl @Inject constructor(
                 StatusCode.SUCCESS.code -> {
                     Result.Success(
                         response.body()!!.results!!.map {
-                            mapper.toModel(it)
+                            mapper.dtoToModel(it)
                         }
                     )
                 }
@@ -62,7 +59,7 @@ class MoviesRemoteDatasourceImpl @Inject constructor(
                 StatusCode.SUCCESS.code -> {
                     Result.Success(
                         response.body()!!.results!!.map {
-                            mapper.toModel(it)
+                            mapper.dtoToModel(it)
                         }
                     )
                 }
@@ -81,7 +78,7 @@ class MoviesRemoteDatasourceImpl @Inject constructor(
                 StatusCode.SUCCESS.code -> {
                     Result.Success(
                         response.body()!!.results!!.map {
-                            mapper.toModel(it)
+                            mapper.dtoToModel(it)
                         }
                     )
                 }

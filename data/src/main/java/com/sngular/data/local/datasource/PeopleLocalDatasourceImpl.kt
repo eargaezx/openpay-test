@@ -3,6 +3,7 @@ package com.sngular.data.local.datasource
 import com.sngular.data.local.dao.PeopleDao
 import com.sngular.data.local.dao.PeopleImageDao
 import com.sngular.data.local.dao.ReviewDao
+import com.sngular.data.remote.mapper.Mapper
 import com.sngular.data.remote.mapper.PeopleImageMapper
 import com.sngular.data.remote.mapper.PeopleMapper
 import com.sngular.data.remote.mapper.ReviewMapper

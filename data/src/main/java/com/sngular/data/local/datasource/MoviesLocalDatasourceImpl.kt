@@ -15,14 +15,14 @@ class MoviesLocalDatasourceImpl @Inject constructor(
     private val mapper: MovieMapper
 ) : MoviesLocalDatasource{
     override suspend fun getAll(size: Int): List<Movie> {
-       return dao.getAll(size).map { mapper.toModel(it) }
+       return dao.getAll(size).map { mapper.entityToModel(it) }
     }
 
     override suspend fun insertAll(movies: List<Movie>) {
-        dao.insertAll(movies.map { mapper.fromModel(it) })
+        dao.insertAll(movies.map { mapper.modelToEntity(it) })
     }
 
     override suspend fun deleteAll(movies: List<Movie>) {
-        dao.deleteAll(movies.map { mapper.fromModel(it) })
+        dao.deleteAll(movies.map { mapper.modelToEntity(it) })
     }
 }

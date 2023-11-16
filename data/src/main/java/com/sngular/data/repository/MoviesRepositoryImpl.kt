@@ -12,7 +12,6 @@ import com.sngular.domain.datasource.local.MoviesLocalDatasource
 import com.sngular.domain.model.Movie
 import com.sngular.domain.repository.MoviesRepository
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.launchIn
 import javax.inject.Inject
 import kotlinx.coroutines.flow.map
 
@@ -30,11 +29,11 @@ class MoviesRepositoryImpl @Inject constructor(
                 enablePlaceholders = false
             ),
             pagingSourceFactory = {
-                MoviesPagingSource(apiService, localDataSource, MovieCategory.Popular)
+                MoviesPagingSource(apiService, localDataSource, MovieCategory.Popular, mapper)
             }
         ).flow.map { pagingData ->
             pagingData.map { movieEntity ->
-                mapper.toModel(movieEntity) // convert
+                mapper.entityToModel(movieEntity) // convert
             }
         }
 
@@ -47,11 +46,11 @@ class MoviesRepositoryImpl @Inject constructor(
             enablePlaceholders = false
         ),
         pagingSourceFactory = {
-            MoviesPagingSource(apiService, localDataSource, MovieCategory.TopRated)
+            MoviesPagingSource(apiService, localDataSource, MovieCategory.TopRated, mapper)
         }
     ).flow.map { pagingData ->
         pagingData.map { movieEntity ->
-            mapper.toModel(movieEntity) // convert
+            mapper.entityToModel(movieEntity) // convert
         }
     }
 
@@ -63,11 +62,11 @@ class MoviesRepositoryImpl @Inject constructor(
             enablePlaceholders = false
         ),
         pagingSourceFactory = {
-            MoviesPagingSource(apiService, localDataSource, MovieCategory.Suggested)
+            MoviesPagingSource(apiService, localDataSource, MovieCategory.Suggested, mapper)
         }
     ).flow.map { pagingData ->
         pagingData.map { movieEntity ->
-            mapper.toModel(movieEntity) // convert
+            mapper.entityToModel(movieEntity) // convert
         }
     }
 

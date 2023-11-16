@@ -4,8 +4,8 @@ import com.sngular.data.local.entity.MovieEntity
 import com.sngular.data.remote.dto.MovieDto
 import com.sngular.domain.model.Movie
 
-class MovieMapper {
-     fun toModel(input: MovieEntity) = with(input){
+object MovieMapper: Mapper<MovieEntity, MovieDto, Movie> {
+     override fun entityToModel(input: MovieEntity) = with(input){
         Movie(
             id = id,
             posterPath = posterPath,
@@ -17,7 +17,7 @@ class MovieMapper {
         )
     }
 
-    fun toModel(input: MovieDto) = with(input){
+    override fun dtoToModel(input: MovieDto) = with(input){
         Movie(
             id = id,
             posterPath = posterPath,
@@ -29,7 +29,7 @@ class MovieMapper {
         )
     }
 
-    fun fromModel(input: Movie) = with(input){
+    override fun modelToEntity(input: Movie) = with(input){
         MovieEntity(
             id = id,
             posterPath = posterPath,
@@ -41,7 +41,7 @@ class MovieMapper {
         )
     }
 
-     fun fromDto(input: MovieDto) = with(input){
+     fun dtoToEntity(input: MovieDto) = with(input){
         MovieEntity(
             id = id,
             posterPath = posterPath,
@@ -52,6 +52,5 @@ class MovieMapper {
             page = page
         )
     }
-
 
 }

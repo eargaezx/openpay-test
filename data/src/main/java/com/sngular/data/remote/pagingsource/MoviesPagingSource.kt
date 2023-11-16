@@ -16,11 +16,11 @@ import java.io.IOException
 class MoviesPagingSource (
     private val apiService: ApiService,
     private val datasource: MoviesLocalDatasource,
-    private val movieCategory: MovieCategory
+    private val movieCategory: MovieCategory,
+    private val mapper: MovieMapper
 ): PagingSource<Int, MovieEntity>(){
     private val INITIAL_PAGE_INDEX = 1
     private val INITIAL_PAGE_INDEX_REMOTE = 1
-    private val mapper = MovieMapper()
 
     override fun getRefreshKey(state: PagingState<Int, MovieEntity>): Int? {
         return state.anchorPosition?.let {
@@ -40,10 +40,10 @@ class MoviesPagingSource (
             }
             delay(1000L)
             val pagedResponse = response.body()
-            val data = pagedResponse?.results?.map { mapper.fromDto(it) }.also { itr ->
+            val data = pagedResponse?.results?.map { mapper.dtoToEntity(it) }.also { itr ->
                 if (itr != null) {
                     withContext(Dispatchers.IO) {
-                        datasource.insertAll( itr.map { mapper.toModel(it) })
+                        datasource.insertAll( itr.map { mapper.entityToModel(it) })
                     }
 
                 }
@@ -66,7 +66,7 @@ class MoviesPagingSource (
     private suspend fun getLocalData(params: LoadParams<Int>, e: Exception): LoadResult<Int, MovieEntity>{
         val pageNumberLocal = params.key ?: INITIAL_PAGE_INDEX
         val movies = withContext(Dispatchers.IO) {datasource.getAll(params.loadSize) }
-        val result = movies.map { mapper.fromModel(it) }
+        val result = movies.map { mapper.modelToEntity(it) }
         return if (result.isNotEmpty()) {
             LoadResult.Page(
                 data = result,

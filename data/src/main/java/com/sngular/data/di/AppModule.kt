@@ -75,6 +75,6 @@ object AppModule {
     @Provides
     @Singleton
     fun provideMovieMapper(): MovieMapper {
-        return MovieMapper()
+        return MovieMapper
     }
 }
