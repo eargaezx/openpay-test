@@ -18,7 +18,9 @@ import com.sngular.openpaytest.ui.utils.GlideHelper
 import com.sngular.openpaytest.ui.utils.urlPost
 import com.sngular.openpaytest.ui.utils.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 @AndroidEntryPoint
 class ProfileFragment : Fragment(R.layout.fragment_profile) {
@@ -50,7 +52,9 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
             viewModel.uiState.collect{  result ->
                 when(result){
                     is Result.Loading -> {
-                        dialogNavigator.showLoading(tag!!)
+                        withContext(Dispatchers.Main){
+                            dialogNavigator.showLoading(tag!!)
+                        }
                     }
                     is Result.Success -> {
                         binding.model = result.data
@@ -65,12 +69,15 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
                         result.data?.reviews?.let {
                             adapterReviews.submitData(PagingData.from(it))
                         }
-
-                        dialogNavigator.hideLoading(tag!!)
+                        withContext(Dispatchers.Main){
+                            dialogNavigator.hideLoading(tag!!)
+                        }
                     }
                     is Result.Error -> {
-                        dialogNavigator.hideLoading(tag!!)
-                        dialogNavigator.showException(result.message!!)
+                        withContext(Dispatchers.Main){
+                            dialogNavigator.hideLoading(tag!!)
+                            dialogNavigator.showException(result.message!!)
+                        }
                     }
                 }
             }

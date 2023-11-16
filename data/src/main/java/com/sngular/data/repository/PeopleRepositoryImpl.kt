@@ -25,7 +25,7 @@ class PeopleRepositoryImpl @Inject constructor(
                 people = localDatasource.getPeople()
             }
             emit(Result.Success(people))
-        } catch (e: IOException) {
+        } catch (e: Exception) {
             emit(Result.Error("Couldn't reach server. Check your internet connection!"))
         }
     }
