@@ -10,10 +10,9 @@ import javax.inject.Inject
 import com.sngular.domain.state.Result
 
 class GetUserImageUseCase @Inject constructor(
-    private val repository: UserImagesRespository,
-    private val dispatcher: CoroutineDispatcher = Dispatchers.IO
+    private val repository: UserImagesRespository
 ){
      operator fun invoke(): Flow<Result<List<UserImage>>> {
-        return repository.getAll().flowOn(dispatcher)
+        return repository.getAll()
     }
 }

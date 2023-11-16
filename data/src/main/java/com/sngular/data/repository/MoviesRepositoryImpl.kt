@@ -12,6 +12,7 @@ import com.sngular.domain.datasource.local.MoviesLocalDatasource
 import com.sngular.domain.model.Movie
 import com.sngular.domain.repository.MoviesRepository
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.launchIn
 import javax.inject.Inject
 import kotlinx.coroutines.flow.map
 

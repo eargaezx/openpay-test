@@ -7,6 +7,7 @@ import com.sngular.domain.repository.MoviesRepository
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flowOn
 import javax.inject.Inject
 
 class GetMoviesUseCase @Inject constructor(
@@ -15,9 +16,9 @@ class GetMoviesUseCase @Inject constructor(
 ){
     operator fun invoke(category: MovieCategory):  Flow<PagingData<Movie>> {
         return when(category){
-            MovieCategory.Popular -> repository.popularMovies
-            MovieCategory.TopRated -> repository.topRatedMovies
-            MovieCategory.Suggested -> repository.suggestedMovies
+            MovieCategory.Popular -> repository.popularMovies.flowOn(dispatcher)
+            MovieCategory.TopRated -> repository.topRatedMovies.flowOn(dispatcher)
+            MovieCategory.Suggested -> repository.suggestedMovies.flowOn(dispatcher)
         }
     }
 }

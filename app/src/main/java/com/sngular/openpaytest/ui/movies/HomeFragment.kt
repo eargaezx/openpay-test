@@ -34,41 +34,37 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     }
 
     private fun setupUI() {
-        popularMoviesAdapter =  binding.rvPopularMovies.fetchMoviesAdapter()
-        topMoviesAdapter =  binding.rvTopratedMovies.fetchMoviesAdapter()
-        suggestedMoviesAdapter =  binding.rvSuggestedMovies.fetchMoviesAdapter()
+        popularMoviesAdapter = binding.rvPopularMovies.fetchMoviesAdapter()
+        topMoviesAdapter = binding.rvTopratedMovies.fetchMoviesAdapter()
+        suggestedMoviesAdapter = binding.rvSuggestedMovies.fetchMoviesAdapter()
     }
 
 
-    private fun setupObserver(){
-        viewLifecycleOwner.lifecycleScope.launch(Dispatchers.IO) {
-            launch {
-                viewModel.popularMovies.collect{ pagingData ->
-                    loadRecyclerViewData(MovieCategory.Popular, pagingData)
-                }
+    private fun setupObserver() {
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewModel.popularMovies.collect { pagingData ->
+                loadRecyclerViewData(MovieCategory.Popular, pagingData)
             }
-
-            launch {
-                viewModel.topRatedMovies.collect{ pagingData ->
-                    loadRecyclerViewData(MovieCategory.TopRated, pagingData)
-                }
+        }
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewModel.topRatedMovies.collect { pagingData ->
+                loadRecyclerViewData(MovieCategory.TopRated, pagingData)
             }
-
-            launch {
-                viewModel.suggestedMovies.collect{ pagingData ->
-                    loadRecyclerViewData(MovieCategory.Suggested, pagingData)
-                }
+        }
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewModel.suggestedMovies.collect { pagingData ->
+                loadRecyclerViewData(MovieCategory.Suggested, pagingData)
             }
         }
     }
 
-    private suspend fun loadRecyclerViewData(category: MovieCategory, data: PagingData<Movie>){
+    private suspend fun loadRecyclerViewData(category: MovieCategory, data: PagingData<Movie>) {
         binding.apply {
-           when(category){
-               MovieCategory.Popular ->  popularMoviesAdapter.submitData(data)
-               MovieCategory.TopRated ->  topMoviesAdapter.submitData(data)
-               MovieCategory.Suggested ->  suggestedMoviesAdapter.submitData(data)
-           }
+            when (category) {
+                MovieCategory.Popular -> popularMoviesAdapter.submitData(data)
+                MovieCategory.TopRated -> topMoviesAdapter.submitData(data)
+                MovieCategory.Suggested -> suggestedMoviesAdapter.submitData(data)
+            }
         }
     }
 }

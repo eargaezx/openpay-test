@@ -7,7 +7,9 @@ import com.sngular.data.local.entity.MovieEntity
 import com.sngular.data.remote.api.ApiService
 import com.sngular.data.remote.mapper.MovieMapper
 import com.sngular.domain.datasource.local.MoviesLocalDatasource
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.withContext
 import retrofit2.HttpException
 import java.io.IOException
 
@@ -36,11 +38,14 @@ class MoviesPagingSource (
                 MovieCategory.TopRated -> apiService.getTopMovies(pageNumber)
                 MovieCategory.Suggested -> apiService.getSuggestedMovies(pageNumber)
             }
-            delay(2000L)
+            delay(1000L)
             val pagedResponse = response.body()
             val data = pagedResponse?.results?.map { mapper.fromDto(it) }.also { itr ->
                 if (itr != null) {
-                    datasource.insertAll( itr.map { mapper.toModel(it) })
+                    withContext(Dispatchers.IO) {
+                        datasource.insertAll( itr.map { mapper.toModel(it) })
+                    }
+
                 }
             }
             LoadResult.Page(
@@ -60,7 +65,7 @@ class MoviesPagingSource (
 
     private suspend fun getLocalData(params: LoadParams<Int>, e: Exception): LoadResult<Int, MovieEntity>{
         val pageNumberLocal = params.key ?: INITIAL_PAGE_INDEX
-        val movies = datasource.getAll(params.loadSize)
+        val movies = withContext(Dispatchers.IO) {datasource.getAll(params.loadSize) }
         val result = movies.map { mapper.fromModel(it) }
         return if (result.isNotEmpty()) {
             LoadResult.Page(
