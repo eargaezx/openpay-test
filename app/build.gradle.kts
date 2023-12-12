@@ -1,3 +1,5 @@
+import java.util.Properties
+
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
@@ -106,6 +108,8 @@ dependencies {
 
     //ImagePicker
     implementation("com.github.dhaval2404:imagepicker:2.1")
+
+    implementation("androidx.core:core-splashscreen:1.0.0")
 
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")

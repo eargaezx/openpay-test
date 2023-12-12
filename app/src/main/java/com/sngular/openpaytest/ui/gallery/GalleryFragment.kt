@@ -27,9 +27,7 @@ class GalleryFragment : Fragment(R.layout.fragment_gallery) {
     private val binding by viewBinding(FragmentGalleryBinding::bind)
     private val viewModel by viewModels<GalleryViewModel>()
 
-    val adapter = UserImagesAdapter(
-        onCancelClicked = { pos, item -> onRemoveImage(pos, item) }
-    )
+    val adapter = UserImagesAdapter()
 
 
     private val startForProfileImageResult =
@@ -38,7 +36,7 @@ class GalleryFragment : Fragment(R.layout.fragment_gallery) {
             val data = result.data
             if (resultCode == Activity.RESULT_OK) {
                 val fileUri = data?.data!!
-                adapter.pushItem(UserImage(""))
+                //adapter.pushItem(UserImage(""))
                 viewModel.uploadMultipleFile(listOf(fileUri))
             } else if (resultCode == ImagePicker.RESULT_ERROR) {
                 // binding.progressBar.hide()
@@ -81,7 +79,7 @@ class GalleryFragment : Fragment(R.layout.fragment_gallery) {
             }
             is Result.Success -> {
                 result.data?.let {
-                    adapter.updateList(it.toMutableList())
+                    adapter.submitList(it.toMutableList())
                 }
             }
             is Result.Error -> {
@@ -90,8 +88,5 @@ class GalleryFragment : Fragment(R.layout.fragment_gallery) {
         }
     }
 
-    private fun onRemoveImage(pos: Int, item: Uri) {
-        adapter.removeItem(pos)
-    }
 
 }

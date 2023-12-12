@@ -13,4 +13,12 @@
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
+
+
+    <style name="SplashApp" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">#FFFFFF</item>
+        <item name="windowSplashScreenIconBackgroundColor">#000000</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/googleg_standard_color_18</item>
+        <item name="postSplashScreenTheme">@style/Theme.OpenpayTest</item>
+    </style>
 </resources>

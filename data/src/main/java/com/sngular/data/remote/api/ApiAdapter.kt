@@ -15,6 +15,7 @@ object ApiAdapter {
         // Asociamos el interceptor a las peticiones
         val httpClient = OkHttpClient.Builder()
         httpClient.addInterceptor(AuthHeaderInterceptor())
+        httpClient.addInterceptor(LogInterceptor())
 
         // Create a trust manager that does not validate certificate chains
         /*val trustAllCerts = arrayOf<TrustManager>(object : X509TrustManager {
